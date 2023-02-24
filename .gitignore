@@ -1,0 +1,6 @@
+# Ignore folders
+tests/
+venv/
+
+# Ignore files
+poetry.lock
