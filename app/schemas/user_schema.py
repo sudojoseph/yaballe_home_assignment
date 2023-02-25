@@ -12,12 +12,13 @@ class UserSchema(BaseModel):
     @validator('first_name')
     def first_name_length(cls, value):
         has_min_length('first name', value, 2)
+        return value
     
 
     @validator('last_name')
     def last_name_length(cls, value):
         has_min_length('last name', value, 2)
-    
+        return value
 
     @validator('email')
     def email_must_contain_at_symbol(cls, value):
@@ -34,9 +35,9 @@ class UserFavoriteProductSchema(BaseModel):
     @validator('product_id')
     def product_id_length(cls, value):
         has_min_length('product id', value, 3)
-    
+        return value
 
     @validator('source')
     def sourse_length(cls, value):
-        has_min_length('source', value, 2)
         validate_source(value)
+        return value

@@ -12,12 +12,13 @@ class ProductSchema(BaseModel):
     @validator('product_id')
     def product_id_length(cls, value):
         has_min_length('product id', value, 3)
+        return value
     
 
     @validator('title')
     def title_length(cls, value):
         has_min_length('title', value, 2)
-    
+        return value
 
     @validator('price')
     def price_must_be_positive(cls, value):
@@ -30,6 +31,6 @@ class ProductSchema(BaseModel):
     def source_value(cls, value):
         validate_source(value)
         has_min_length('source', value, 1)
-        
-    
+        return value
+
 

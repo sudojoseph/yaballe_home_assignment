@@ -1,7 +1,7 @@
 import requests
 from flask import Blueprint, request
 from db.product_db import fetch_product_from_db, insert_new_product
-from utils.utils import stringify_id
+from db.db_utils import stringify_id
 from schemas.product_schema import ProductSchema
 import os
 
@@ -31,6 +31,10 @@ def fetch_product():
         except Exception as error:
             return {'message': 'error fetching product from yaballe', 'error': str(error), 'status': 500}
 
+
+        if 'data' not in response:
+            return {'message': 'product not found', 'status': 404}
+        
 
         response_object = response['data']
         new_product = {}

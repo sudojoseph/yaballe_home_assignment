@@ -1,13 +1,16 @@
 from flask import Blueprint, request, jsonify
 from db.user_db import fetch_user_by_email, insert_user, fetch_users_favorite_products, append_favorite_products_to_user
-from utils.utils import stringify_id
+from db.db_utils import stringify_id
 from schemas.user_schema import UserSchema, UserFavoriteProductSchema
 
+
 user_view_blueprint = Blueprint('user_view_blueprint', __name__)
+
 
 @user_view_blueprint.route('/', methods=['POST'])
 def create_user():
     request_data = request.get_json()
+
 
     try:
         exists = fetch_user_by_email(request_data['email'])
@@ -37,27 +40,39 @@ def create_user():
     return {'message': 'User successfully added', 'status': 201}
 
 
-@user_view_blueprint.route('/<user_email>/favorite/', methods=['POST', 'GET'])
+@user_view_blueprint.route('/<user_email>/favorite/', methods=['PUT', 'GET'])
 def user_favorite_products(user_email):
 
 
     if request.method == 'GET':
         user = fetch_user_by_email(user_email)
+        
+        
+        if user is None:
+            return {'message': 'User does not exist', 'status': 404}
+        
+        
         favorite_product_array = user['favorite_products']
+
+
         if not favorite_product_array:
             return {'message': 'User has no favorite products'}
         
+
         try:
             favorite_products = fetch_users_favorite_products(favorite_product_array)
         except Exception as error:
             return {'message': 'Not able to fetch favorite products', 'error': str(error), 'status': 500}
+
 
         for favorite_product in favorite_products:
             stringify_id(favorite_product)
 
 
         return favorite_products
-    else:
+    
+    
+    if request.method == 'PUT':
         request_data = request.get_json()
         products_list = request_data['favorite_products']
 
@@ -68,6 +83,9 @@ def user_favorite_products(user_email):
             except ValueError as error:
                 return {'message': 'validation error', 'error': str(error), 'status': 400}
             
-
-        append_favorite_products_to_user(user_email, products_list)
-        return {'message': 'success'}
+        try:
+            append_favorite_products_to_user(user_email, products_list)
+            return {'message': 'successfully added favorite products', 'status': 201}
+        except Exception as error:
+            return {'message': 'Not able to add favorite products to user', 'error': str(error), 'status': 500}
+        
