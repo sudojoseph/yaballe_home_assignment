@@ -1,6 +1,7 @@
 # Ignore folders
 tests/
 venv/
+__pycache__/
 
 # Ignore files
 poetry.lock
