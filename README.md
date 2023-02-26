@@ -1,53 +1,56 @@
-Yaballe
+#Yaballe
 
-This project is a Python server for an e-commerce web application.
-Installation
+##Installation
 
 To get started with this project, you will need to perform the following steps:
 
-    Clone this repository to your local machine.
-    Navigate to the project directory.
-    Create a virtual environment: python3 -m venv env
-    Activate the virtual environment: source env/bin/activate
-    Install the required dependencies: pip install -r requirements.txt
+1. Clone this repository to your local machine.
+2. Navigate to the project directory.
+3. Create a virtual environment: python3 -m venv env
+4. Activate the virtual environment: source env/bin/activate
+5. Install the required dependencies: pip install -r requirements.txt
 
-Usage
+##Usage
 
 To use this project, you will need to set two environment variables:
 
-bash
-
+```bash
 export YABALLE_SERVER_KEY=<YABBALE_SERVER_KEY>
 export MONGO_DB_PASSWORD_YABALLE=<MONGO_DB_PASSWORD_YABALLE>
+```
 
-Add a Product
+###Add a Product
 
-To add a product, create a POST request with the following endpoint:
+To add a product, create a **POST** request with the following endpoint:
 
-bash
-
+```bash
 http://127.0.0.1:5000/products/
+
+```
 
 Use this JSON object:
 
-json
+```javascript
 
 {
     "source_id": "B07PXGQC1Q",
     "source": "amazon"
 }
 
-Create a User
+```
 
-To create a user, make a POST request to:
+###Create a User
 
-bash
+To create a user, make a **POST** request to:
 
+```bash
 http://127.0.0.1:5000/user
+
+```
 
 with the following JSON object:
 
-json
+```javascript
 
 {
 	"first_name": "Fred",
@@ -55,17 +58,19 @@ json
 	"email": "fred@flinstone.com"
 }
 
-Update a User's Favorite Products
+```
 
-To update a user's favorite products, you need to make a PUT request with the following URL:
+###Update a User's Favorite Products
 
-bash
+To update a user's favorite products, you need to make a **PUT** request with the following URL:
 
+```bash
 http://127.0.0.1:5000/user/<users_email>/favorite
 
+```
 Use the following JSON object:
 
-json
+```javascript
 
 {
 	"favorite_products": [
@@ -80,10 +85,13 @@ json
 	]
 }
 
-Get a User's Favorite Products
+```
 
-To get all the user's favorite products, make a GET request with the following URL:
+###Get a User's Favorite Products
 
-bash
+To get all the user's favorite products, make a **GET** request with the following URL:
 
+```bash
 http://127.0.0.1:5000/user/<users_email>/favorite
+
+```
