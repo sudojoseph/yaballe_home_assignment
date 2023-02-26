@@ -1,6 +1,6 @@
-#Yaballe
+# Yaballe
 
-##Installation
+## Installation
 
 To get started with this project, you will need to perform the following steps:
 
@@ -10,7 +10,7 @@ To get started with this project, you will need to perform the following steps:
 4. Activate the virtual environment: source env/bin/activate
 5. Install the required dependencies: pip install -r requirements.txt
 
-##Usage
+## Usage
 
 To use this project, you will need to set two environment variables:
 
@@ -19,7 +19,7 @@ export YABALLE_SERVER_KEY=<YABBALE_SERVER_KEY>
 export MONGO_DB_PASSWORD_YABALLE=<MONGO_DB_PASSWORD_YABALLE>
 ```
 
-###Add a Product
+### Add a Product
 
 To add a product, create a **POST** request with the following endpoint:
 
@@ -39,7 +39,7 @@ Use this JSON object:
 
 ```
 
-###Create a User
+### Create a User
 
 To create a user, make a **POST** request to:
 
@@ -60,7 +60,7 @@ with the following JSON object:
 
 ```
 
-###Update a User's Favorite Products
+### Update a User's Favorite Products
 
 To update a user's favorite products, you need to make a **PUT** request with the following URL:
 
@@ -87,7 +87,7 @@ Use the following JSON object:
 
 ```
 
-###Get a User's Favorite Products
+### Get a User's Favorite Products
 
 To get all the user's favorite products, make a **GET** request with the following URL:
 
