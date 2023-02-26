@@ -9,6 +9,8 @@ To get started with this project, you will need to perform the following steps:
 3. Create a virtual environment: python3 -m venv env
 4. Activate the virtual environment: source env/bin/activate
 5. Install the required dependencies: pip install -r requirements.txt
+6. Navigate to the /app directory:
+7. Run: python3 app.py
 
 ## Usage
 
