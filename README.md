@@ -96,4 +96,4 @@ http://127.0.0.1:5000/user/<users_email>/favorite
 
 ```
 
-***Just a small note: if a user adds a product to their favorites but it's not currently saved in MongoDB, it won't show up in the GET request.*** 
+***Just a small note: if a user adds a product to their favorites but the product is not currently saved in MongoDB, it won't show up in the GET request.*** 
