@@ -95,3 +95,5 @@ To get all the user's favorite products, make a **GET** request with the followi
 http://127.0.0.1:5000/user/<users_email>/favorite
 
 ```
+
+***Just a small note: if a user adds a product to their favorites but it's not currently saved in MongoDB, it won't show up in the GET request.*** 
