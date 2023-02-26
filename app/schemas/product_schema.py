@@ -8,12 +8,10 @@ class ProductSchema(BaseModel):
     price: float or int
     source: str
 
-    
     @validator('product_id')
     def product_id_length(cls, value):
         has_min_length('product id', value, 3)
         return value
-    
 
     @validator('title')
     def title_length(cls, value):
@@ -25,7 +23,6 @@ class ProductSchema(BaseModel):
         if value < 0:
             raise ValueError('price must be positive')
         return value
-    
 
     @validator('source')
     def source_value(cls, value):

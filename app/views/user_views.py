@@ -11,71 +11,56 @@ user_view_blueprint = Blueprint('user_view_blueprint', __name__)
 def create_user():
     request_data = request.get_json()
 
-
     try:
         exists = fetch_user_by_email(request_data['email'])
     except Exception as error:
         return {'message': 'Not able to check if user exists', 'error': str(error), 'status': 500}
     
-    
     if exists:
         return jsonify({'error': 'User already exists'})
-    
 
     new_user_data = {**request_data, 'favorite_products': []}
-
 
     try:
         user = UserSchema(**new_user_data)
     except ValueError as error:
         return {'message': 'validation error', 'error': str(error), 'status': 400}
 
-
     try:
         insert_user(user.dict())
     except Exception as error:
         return {'message': 'Not able to add user to database', 'error': str(error), 'status': 500}
 
-    
     return {'message': 'User successfully added', 'status': 201}
 
 
 @user_view_blueprint.route('/<user_email>/favorite/', methods=['PUT', 'GET'])
 def user_favorite_products(user_email):
 
-
     if request.method == 'GET':
         user = fetch_user_by_email(user_email)
-        
-        
+
         if user is None:
             return {'message': 'User does not exist', 'status': 404}
         
-        
         favorite_product_array = user['favorite_products']
-
 
         if not favorite_product_array:
             return {'message': 'User has no favorite products'}
-        
 
         try:
             favorite_products = fetch_users_favorite_products(favorite_product_array)
         except Exception as error:
             return {'message': 'Not able to fetch favorite products', 'error': str(error), 'status': 500}
 
-
         for favorite_product in favorite_products:
             stringify_id(favorite_product)
 
-
         return favorite_products
-    
     
     if request.method == 'PUT':
         request_data = request.get_json()
         products_list = request_data['favorite_products']
-
 
         for product in products_list:
             try:
