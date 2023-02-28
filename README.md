@@ -26,7 +26,7 @@ export MONGO_DB_PASSWORD_YABALLE=<MONGO_DB_PASSWORD_YABALLE>
 To add a product, create a **POST** request with the following endpoint:
 
 ```bash
-http://127.0.0.1:5000/products/
+http://127.0.0.1:5000/product/
 
 ```
 
